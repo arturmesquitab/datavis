@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <title> Gráfico de Barras </title> 
+        <!-- Inclusões das bibliotecas JavaScript para o Highcharts--> 
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> 
+        <script src="http://code.highcharts.com/highcharts.js"></script>     
+    </head> 
+    <body> 
+    	<center>
+    	<h2>Qual o melhor filme, Gloria?</h2>
+    	<img src="gloria-pires-meme-oscar.jpg">
+    	</center>
+    	<div id="container" style="width:100%; height:400px;"></div>
+    	<div id="container2" style="width:100%; height:600px;"></div>
+    	<script>
+    		$(function(){
+					$("#container").highcharts(
+					{ 
+							chart: {
+								type: 'bar'
+							},
+							title: {
+								text: 'Arrecadação de filmes indicados ao Oscar'
+							},
+							xAxis: {
+								categories: ['Mundo', 'EUA', 'Brasil', 'França']
+							},
+							yAxis: {
+								title: {
+									text: 'Arrecadação'
+								}
+							},
+							series: [{
+										name:'Star Wars: O Despertar da Força',
+										data:[2064053170, 935553170, 27982311, 82531281]
+									}, {
+										name:'Spotlight: Segredos Revelados',
+										data:[88025652, 44734955, 1909772, 3121913]
+									}, {
+										name:'Mad Max: Estrada da Fúria',
+										data:[378436354, 153636354, 10447445, 18127803]
+									}, {
+										name:'A Garota Dinamarquesa',
+										data:[64191523, 11114018, 1579700, 1203763]
+									}, {
+										name:'Perdido em Marte',
+										data:[630062825, 228433663, 7513748, 19827502]
+									}, {
+										name:'The Revenant',
+										data:[518584568, 182994930, 10202391, 26139757]
+							}]
+					});
+					$("#container2").highcharts(
+					{ 
+							chart: {
+								type: 'line'
+							},
+							title: {
+								text: 'Arrecadação de filmes indicados ao Oscar na semana de estreia'
+							},
+							xAxis: {
+								categories: ['Sexta', 'Sábado', 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta']
+							},
+							yAxis: {
+								title: {
+									text: 'Arrecadação'
+								}
+							},
+							series: [{
+										name:'Star Wars: O Despertar da Força',
+										data:[119119300, 68294200, 60553200, 40109700, 37361700, 38022200, 27395700]
+									}, {
+										name:'Spotlight: Segredos Revelados',
+										data:[87400, 118300, 89400, 35100, 33400, 53100, 30200]
+									}, {
+										name:'Mad Max: Estrada da Fúria',
+										data:[16785100, 16314700, 12803200, 5385200, 5083800, 3974100, 3747200]
+									}, {
+										name:'A Garota Dinamarquesa',
+										data:[75594, 63808, 47916, 14750, 14086, 15584, 13994]
+									}, {
+										name:'Perdido em Marte',
+										data:[18145681, 22251765, 13911129, 4401171, 5457240, 3741530, 3801813]
+									}, {
+										name:'The Revenant',
+										data:[171758, 157633, 145169, 117768, 104433, 103623, 72135]
+							}]
+					});
+    		});
+    	</script>
+	</body>	 
+</html>
