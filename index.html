@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title> Movies </title>
+		<!-- Inclusões das bibliotecas JavaScript para o Highcharts -->
+		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/highcharts-more.js"></script>
+		<script src="saida.js"></script>
+		<script src="movies2.js"></script>
+	</head>
+	<body>
+		<script>
+			$(function () {
+				$('#linechart').highcharts({
+					chart: {
+						type: 'line'
+					},
+					title: {
+						text: 'Bilheterias e quantidade de cinemas no primeiro final de semana'
+					},
+					xAxis: {
+						text: 'Qnt de cinemas no final de semana de estreia'
+					},
+					yAxis: {
+						title: {
+							text: 'Bilheteria no final de semana de estreia'
+						}
+					},
+					series: [{
+						name: 'Bilheteria (Milhões de dólares US$)',
+						data: z
+						}]		
+				});
+			});
+			$(function () {
+				$('#barchart').highcharts({
+					chart: {
+						type: 'bar'
+					},
+					title: {
+						text: 'Filmes ganhadores do Oscar e suas Bilheterias'
+					},
+					xAxis: {
+						text: 'Filmes',
+						categories: x
+					},
+					yAxis: {
+						title: {
+							text: 'Bilheteria mundial (Milhões de dólares US$)'
+						}
+					},
+					plotOptions: {
+				        series: {
+				            pointWidth: 20
+				        }
+				    },
+					series: [{
+							name: '1 oscar',
+							data: y1,
+							color: 'blue'
+						},{
+							name: '2 oscars',
+							data: y2,
+							color: '#E59400'
+						},{
+							name: '3 oscars',
+							data: y3,
+							color: 'green'
+						},{
+							name: '4 oscars',
+							data: y4,
+							color: 'red'
+						}]		
+				});
+			});
+		</script>
+		<div id="linechart" style="width:100%; height:400px;"></div>
+		<p align="center">O gráfico mostra a bilheteria arrecadada do primeiro final de semana com a respectiva quantidade de cinemas exibindo o filme</p>
+		<hr>
+		<div id="barchart" style="width:100%; height:600px;"></div>
+		<p align="center">O gráfico mostra, por ordem de bilheteria mundial, os filmes de 2007 à 2011 que ganharam pelo menos 1 Oscar. Classificou-se por cores as barras de acordo com a quantidade de prêmios Oscar recebidos.</p>
+	</body>
+</html>
