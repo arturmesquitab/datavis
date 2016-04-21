@@ -10,6 +10,10 @@
 		<script src="saida.js"></script>
 		<script src="movies2.js"></script>
 	</head>
+	<style type="text/css">
+			a:link    {color:blue; background-color:transparent; text-decoration:none}
+			a:visited {color:blue; background-color:transparent; text-decoration:none}
+	</style>
 	<body>
 		<script>
 			$(function () {
@@ -76,10 +80,37 @@
 				});
 			});
 		</script>
-		<div id="linechart" style="width:100%; height:400px;"></div>
-		<p align="center">O gráfico mostra a bilheteria arrecadada do primeiro final de semana com a respectiva quantidade de cinemas exibindo o filme</p>
+		<div id="head" style="width:100%; height:100px;">
+			<img src="gloria-pires-palavras.jpg" alt="Opiniões de Gloria Pires" height="100" width="200" align="left">
+			<br>
+			<font size="10"> Estatísticas de filmes </font>
+		</div>
 		<hr>
-		<div id="barchart" style="width:100%; height:600px;"></div>
+		<div id="intro">
+			<p>	Esta página visa mostrar dois gráficos que visam estudar a bilheteria e suas relações com qualidade do filme ou com o interesse do público.</p>
+			<p>	Os dados se referem a informações de filmes de 2007 à 2011, que pode ser consultado <a href="movies.csv"> aqui</a>.</p>
+			<p>	Mostraremos dois gráficos e devidos comentários a respeito:</p>
+			<a href="#linechart">Bilheteria do final de semana versus quantidade de cinemas exibindo o filme</a><br>
+			<a href="#barchart">Bilheteria de filmes ganhadores de algum prêmio Oscar versus suas devidas bilheterias mundiais</a>
+			<p>	Ao final, comento as <a href="#conclusion">dificuldades</a> na realização desses gráficos, em relação ao Tableau</p>
+		</div>
+		<hr>
+		<div id="linechart" style="width:100%; height:400px;"></div>
+		<div align="right"><a href="g1.png" target="_blank"> Tableau</a></div>
+		<div align="right"><a href="#"> Topo</a></div>
+		<p align="center">O gráfico mostra a bilheteria arrecadada do primeiro final de semana com a respectiva quantidade de cinemas exibindo o filme</p>
+		<p align="justify">Observa-se neste gráfico que a quantidade de salas pode influenciar na bilheteria. Normalmente, se tem muitas salas para filmes provavelmente terão grande sucesso e já se sabe que muitas pessoas irão lotar as salas de cinema. No entanto, o gráfico mostra algumas decepções, isto é, filmes que se alocou muitas salas e não tiveram o mesmo respaldo na bilheteria. Ao mesmo tempo, há filmes que alocaram poucas salas e tiveram grandes picos de bilheterias, como podemos observar para o número de salas entre 3000 e 3250.</p>
+		<hr>
+		<div id="barchart" style="width:100%; height:500px;"></div>
+		<div align="right"><a href="g2.png" target="_blank"> Tableau</a></div>
+		<div align="right"><a href="#"> Topo</a></div>
 		<p align="center">O gráfico mostra, por ordem de bilheteria mundial, os filmes de 2007 à 2011 que ganharam pelo menos 1 Oscar. Classificou-se por cores as barras de acordo com a quantidade de prêmios Oscar recebidos.</p>
+		<p align="justify">O gráfico busca mostrar o mito da relação entre filme de qualidade e bilheteria, como demonstrado por certos usuários em fórum de cinema como um argumento muito comum: "O filme é bom porque teve muita bilheteria". Vemos apenas filmes que ganharam algum prêmio Oscar durante esse período, e tem filmes com bilheterias baixíssimas e grande quantidade de prêmios.</p>
+		<hr>
+		<div id="conclusion">
+			<h1>Comentários</h1>
+			<p>O Tableau é um software completo. Além de analisar o dataset e suas peculiaridades, ele já consegue ordenar e filtrar facilmente os dados a serem exibidos nos gráficos, que são excelentes. O Tableau dá muitas opções de gráficos e organizações. Uma pena que o Tableau não possua uma função de incorporar o gráfico na própria página, da mesma forma que ela faz no Tableau public. Existe a opção de exportar, porém a imagem é estática e não permite interações.</p>
+			<p>Percebe-se o contrário com o uso do Highcharts. A interatividade permite maior exploração e estudo dos gráficos. Porém, para construí-los, não foi fácil: É necessário filtrar e selecionar dados do dataset "na mão", isto é, construindo um software próprio para buscar o que você quer e converte-lo para uma variável do js, tornando assim a tarefa complicada e demorada. Além disso, a possibilidade de gráficos para construir não é a mesma. Veja que o segundo gráfico faltou detalhes (Como a avaliação do Rotten Tomatoes), além das barras não estarem bem posicionadas como ficou no Tableau, visto que foi realizada uma "gambiarra" para colorir pela quantidade de Oscars obtidos.</p>
+		</div>
 	</body>
 </html>
