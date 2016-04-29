@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vinculando um vetor como dados</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <style type="text/css">
+	h1{
+		text-align: center;
+	}
+	h3{
+		text-align: center;
+	}
+	</style>
+</head>
+
+<body>
+<h1>Cinema - 2007 à 2011</h1><hr>
+<h3>Maiores bilheterias</h3>
+<div id="chartBilheteria"></div><hr>
+<h3>Maiores Orçamentos</h3>
+<div id="chartOrcamento"></div><hr>
+<h3>Maiores Lucros</h3>
+<div id="chartLucro"></div><
+<script type="text/javascript">
+    function render(data, comparator, divid, color, fvalue) {
+        d3.select(divid).selectAll("div.h-bar")
+                .data(data)
+            .enter().append("div")
+            .attr("class", "h-bar")
+            .append("span");
+        
+        d3.select(divid).selectAll("div.h-bar")
+                .data(data)
+            .exit().remove();
+        
+        d3.select(divid).selectAll("div.h-bar")
+                .data(data)
+            .attr("class", "h-bar")
+            .style("width", fvalue)
+            .style("background-color", color)
+            .select("span")
+                .text(function (d) {
+                    return d.Film;
+                });
+
+        if(comparator)
+            d3.select(divid)
+                .selectAll("div.h-bar") 
+                .sort(comparator);
+    }
+
+    var comparePorOrcamento = function (a, b) { 
+        return a.Budget_M > b.Budget_M?-1:1;
+    };
+    var comparePorBilheteria = function (a, b) { 
+        return a.Worldwide_Gross_M > b.Worldwide_Gross_M?-1:1;
+    };
+    var comparePorLucro = function (a, b) { 
+        return (a.Worldwide_Gross_M - a.Budget_M) > (b.Worldwide_Gross_M - b.Budget_M) ?-1:1;
+    };
+
+    d3.json("movies.json", function(error, json){ 
+    	var bigO = d3.max(json, function(d){
+    		return d.Worldwide_Gross_M;
+    	});
+
+        render(json, comparePorBilheteria, "#chartBilheteria", "#e41a1c", function (d) {
+                return (d.Worldwide_Gross_M/bigO)*1000 + "px";
+            });
+
+        var bigB = d3.max(json, function(d){
+    		return d.Budget_M;
+    	});
+
+        render(json, comparePorOrcamento, "#chartOrcamento", "#377eb8", function (d) {
+                return (d.Budget_M/bigB)*1000 + "px";
+            });
+
+        var bigL = d3.max(json, function(d){
+    		return (d.Worldwide_Gross_M - d.Budget_M);
+    	});
+        render(json, comparePorLucro, "#chartLucro", "#4daf4a", function (d) {
+                return ((d.Worldwide_Gross_M - d.Budget_M)/bigL)*1000 + "px";
+            });
+    });
+</script>
+</body>
+</html>
