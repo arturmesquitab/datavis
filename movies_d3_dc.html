@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carregando dados de um arquivo csv</title>
+    <link rel="stylesheet" href="css/dc.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/crossfilter.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="js/dc.js" charset="utf-8"></script>
+
+</head>
+<body>
+    <div id="barchartYear"><span> Bilheteria Por Ano</span></div>
+    <div id="barchartGenre"><span> Bilheteria Por Gênero</span></div>
+	<script type="text/javascript">
+        var bchartYear = dc.barChart('#barchartYear');
+        var bchartGenre = dc.barChart('#barchartGenre');
+
+		d3.json("movies.json", function(error, json){
+
+            //criando um crossfilter
+            var facts = crossfilter(json);
+
+            var dateDim = facts.dimension(function(d){
+                return d.Year;
+            });
+
+            var genreDim = facts.dimension(function(d){
+                return d.Genre;
+            });
+
+            var budgetbyyeargroup = dateDim.group().reduceSum(function(d){
+                return d.Budget_M;
+            });
+
+            var budgetbygenregroup = genreDim.group().reduceSum(function(d){
+                return d.Budget_M;
+            });
+
+            bchartYear.width(800)
+                     .height(400)
+                     .margins({top: 30, right: 50, bottom: 25, left: 40})
+                     .dimension(dateDim)
+                     .x(d3.scale.linear().domain([2006, 2012]))
+                     .renderHorizontalGridLines(true)
+                     .brushOn(false)    
+                     .group(budgetbyyeargroup)
+                     .centerBar(true)
+                     .round(dc.round.floor)
+                     .alwaysUseRounding(true)
+                     .xAxis().tickFormat(d3.format('d'));
+
+            bchartGenre.width(800)
+                     .height(400)
+                     .margins({top: 30, right: 50, bottom: 25, left: 40})
+                     .dimension(genreDim)
+                     .x(d3.scale.ordinal().domain(json.map(function(d){return d.Genre;})))
+                     .xUnits(dc.units.ordinal)
+                     .group(budgetbygenregroup)
+                     .renderHorizontalGridLines(true)
+                     .brushOn(false);
+
+            dc.renderAll();
+
+		});
+	</script>			
+</body>
+</html>
